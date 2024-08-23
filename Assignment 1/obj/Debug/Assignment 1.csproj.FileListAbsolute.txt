@@ -1,0 +1,7 @@
+D:\BCA\Sem 5\.Net Framework Using C#\Assignment 1\bin\Debug\Assignment 1.exe.config
+D:\BCA\Sem 5\.Net Framework Using C#\Assignment 1\bin\Debug\Assignment 1.exe
+D:\BCA\Sem 5\.Net Framework Using C#\Assignment 1\bin\Debug\Assignment 1.pdb
+D:\BCA\Sem 5\.Net Framework Using C#\Assignment 1\obj\Debug\Assignment 1.csproj.AssemblyReference.cache
+D:\BCA\Sem 5\.Net Framework Using C#\Assignment 1\obj\Debug\Assignment 1.csproj.CoreCompileInputs.cache
+D:\BCA\Sem 5\.Net Framework Using C#\Assignment 1\obj\Debug\Assignment 1.exe
+D:\BCA\Sem 5\.Net Framework Using C#\Assignment 1\obj\Debug\Assignment 1.pdb
