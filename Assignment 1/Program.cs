@@ -10,7 +10,7 @@ namespace Assignment_1
     {
         static void Main(string[] args)
         {
-            Question4 q = new Question4();
+            Question7 q = new Question7();
             q.fun();
         }
     }
@@ -174,4 +174,112 @@ namespace Assignment_1
             }
         }
     }
+
+    class Question5
+    {
+        public void fun()
+        {
+            Console.Write("Enter a password: ");
+            string password = Console.ReadLine();
+
+            if (ValidatePassword(password))
+            {
+                Console.WriteLine("Password is valid.");
+            }
+            else
+            {
+                Console.WriteLine("Password is invalid. It must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number.");
+            }
+            Console.ReadLine(); // To prevent the console application from closing immediately after running
+        }
+
+        static bool ValidatePassword(string password)
+        {
+            if (password.Length < 8)
+                return false;
+            if (!password.Any(char.IsUpper))
+                return false;
+            if (!password.Any(char.IsLower))
+                return false;
+            if (!password.Any(char.IsDigit))
+                return false;
+            return true;
+        }
+    }
+
+    class Question6
+    {
+        public void fun()
+        {
+            Console.Write("Enter the distance traveled (in kilometers): ");
+            double distance = Convert.ToDouble(Console.ReadLine());
+
+            Console.Write("Did the ride occur after 10 PM? (yes/no): ");
+            string nightRide = Console.ReadLine().ToLower();
+
+            double fare = CalculateFare(distance, nightRide == "yes");
+
+            Console.WriteLine($"The total fare for the ride is: Rs. {fare}");
+            Console.ReadLine(); // Prevents the console from closing immediately
+        }
+
+        static double CalculateFare(double distance, bool isNightRide)
+        {
+            double baseFare = 20.0; // Flat rate for the first 2 kilometers
+            double additionalFareRate = 10.0; // Per kilometer rate after the first 2 kilometers
+            double nightSurchargeRate = 1.5; // 50% surcharge for night rides
+
+            double fare = baseFare;
+
+            if (distance > 2)
+            {
+                fare += (distance - 2) * additionalFareRate;
+            }
+
+            if (isNightRide)
+            {
+                fare *= nightSurchargeRate;
+            }
+
+            return fare;
+        }
+    }
+
+    class Question7
+    {
+        public void fun()
+        {
+            bool[] attendance = new bool[5];
+
+            for (int i = 0; i < attendance.Length; i++)
+            {
+                Console.Write($"Was the student present on day {i + 1}? (yes/no): ");
+                string input = Console.ReadLine().ToLower();
+                attendance[i] = input == "yes";
+            }
+
+            int totalDaysAttended = CalculateAttendance(attendance);
+            bool hasPerfectAttendance = totalDaysAttended == attendance.Length;
+
+            Console.WriteLine($"\nTotal days attended: {totalDaysAttended}");
+            Console.WriteLine(hasPerfectAttendance ? "The student has perfect attendance." : "The student does not have perfect attendance.");
+            Console.ReadLine(); // Prevents the console from closing immediately
+        }
+
+        static int CalculateAttendance(bool[] attendance)
+        {
+            int totalDays = 0;
+
+            foreach (bool attended in attendance)
+            {
+                if (attended)
+                {
+                    totalDays++;
+                }
+            }
+
+            return totalDays;
+        }
+    }
+
 }
