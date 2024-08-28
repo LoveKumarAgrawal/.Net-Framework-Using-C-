@@ -282,4 +282,201 @@ namespace Assignment_1
         }
     }
 
+    class Question8
+    {
+        public void fun()
+        {
+            // Q8. An individual tracks their expenses for each month in a year. 
+            // Calculate the total expenses for the year and identify the month with the highest and lowest expenses.
+
+            double[] monthlyExpenses = new double[12];
+            string[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+
+            // Input monthly expenses
+            for (int i = 0; i < monthlyExpenses.Length; i++)
+            {
+                Console.Write($"Enter expenses for {months[i]}: ");
+                monthlyExpenses[i] = Convert.ToDouble(Console.ReadLine());
+            }
+
+            // Calculate total expenses
+            double totalExpenses = 0;
+            foreach (double expense in monthlyExpenses)
+            {
+                totalExpenses += expense;
+            }
+
+            // Find month with highest and lowest expenses
+            double maxExpense = monthlyExpenses[0];
+            double minExpense = monthlyExpenses[0];
+            int maxExpenseMonth = 0;
+            int minExpenseMonth = 0;
+
+            for (int i = 1; i < monthlyExpenses.Length; i++)
+            {
+                if (monthlyExpenses[i] > maxExpense)
+                {
+                    maxExpense = monthlyExpenses[i];
+                    maxExpenseMonth = i;
+                }
+
+                if (monthlyExpenses[i] < minExpense)
+                {
+                    minExpense = monthlyExpenses[i];
+                    minExpenseMonth = i;
+                }
+            }
+
+            // Display results
+            Console.WriteLine($"\nTotal expenses for the year: Rs. {totalExpenses}");
+            Console.WriteLine($"Highest expenses were in {months[maxExpenseMonth]}: Rs. {maxExpense}");
+            Console.WriteLine($"Lowest expenses were in {months[minExpenseMonth]}: Rs. {minExpense}");
+
+            Console.ReadLine(); // Prevents the console from closing immediately
+        }
+    }
+
+
+    // Question 9 Implement a shopping cart system where a user can add items, remove items, and view the total price. Assume each item has a name and a price
+    class Item
+    {
+        public string Name { get; set; }
+        public double Price { get; set; }
+
+        public Item(string name, double price)
+        {
+            Name = name;
+            Price = price;
+        }
+    }
+
+    class ShoppingCart
+    {
+        private List<Item> items;
+
+        public ShoppingCart()
+        {
+            items = new List<Item>();
+        }
+
+        public void AddItem(Item item)
+        {
+            items.Add(item);
+            Console.WriteLine($"{item.Name} added to the cart.");
+        }
+
+        public void RemoveItem(string itemName)
+        {
+            Item itemToRemove = items.Find(item => item.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
+            if (itemToRemove != null)
+            {
+                items.Remove(itemToRemove);
+                Console.WriteLine($"{itemToRemove.Name} removed from the cart.");
+            }
+            else
+            {
+                Console.WriteLine($"{itemName} not found in the cart.");
+            }
+        }
+
+        public void ViewCart()
+        {
+            if (items.Count == 0)
+            {
+                Console.WriteLine("Your cart is empty.");
+                return;
+            }
+
+            Console.WriteLine("\nItems in your cart:");
+            foreach (Item item in items)
+            {
+                Console.WriteLine($"{item.Name}: Rs. {item.Price}");
+            }
+
+            double totalPrice = CalculateTotalPrice();
+            Console.WriteLine($"\nTotal price: Rs. {totalPrice}");
+        }
+
+        private double CalculateTotalPrice()
+        {
+            double total = 0;
+            foreach (Item item in items)
+            {
+                total += item.Price;
+            }
+            return total;
+        }
+    }
+
+    class Question9
+    {
+        public void fun()
+        {
+            ShoppingCart cart = new ShoppingCart();
+
+            while (true)
+            {
+                Console.WriteLine("\nShopping Cart Menu:");
+                Console.WriteLine("1. Add Item");
+                Console.WriteLine("2. Remove Item");
+                Console.WriteLine("3. View Cart");
+                Console.WriteLine("4. Exit");
+                Console.Write("Select an option (1-4): ");
+                int choice = Convert.ToInt32(Console.ReadLine());
+
+                switch (choice)
+                {
+                    case 1:
+                        Console.Write("Enter the item name: ");
+                        string itemName = Console.ReadLine();
+                        Console.Write("Enter the item price: ");
+                        double itemPrice = Convert.ToDouble(Console.ReadLine());
+                        cart.AddItem(new Item(itemName, itemPrice));
+                        break;
+
+                    case 2:
+                        Console.Write("Enter the name of the item to remove: ");
+                        string removeItemName = Console.ReadLine();
+                        cart.RemoveItem(removeItemName);
+                        break;
+
+                    case 3:
+                        cart.ViewCart();
+                        break;
+
+                    case 4:
+                        Console.WriteLine("Exiting the shopping cart. Goodbye!");
+                        return;
+
+                    default:
+                        Console.WriteLine("Invalid option. Please select 1-4.");
+                        break;
+                }
+            }
+        }
+    }
+
+    // 10.Create a program that calculates the monthly salary of an employee based on their hourly wage and the number of hours worked in a week. Consider that there are 4 weeks in a month.
+    class Question10
+    {
+        public void fun()
+        {
+            Console.Write("Enter the hourly wage: Rs. ");
+            double hourlyWage = Convert.ToDouble(Console.ReadLine());
+
+            Console.Write("Enter the number of hours worked in a week: ");
+            double hoursWorkedPerWeek = Convert.ToDouble(Console.ReadLine());
+
+            double monthlySalary = CalculateMonthlySalary(hourlyWage, hoursWorkedPerWeek);
+
+            Console.WriteLine($"\nThe monthly salary is: Rs. {monthlySalary}");
+        }
+
+        static double CalculateMonthlySalary(double hourlyWage, double hoursWorkedPerWeek)
+        {
+            const int weeksInMonth = 4;
+            double weeklySalary = hourlyWage * hoursWorkedPerWeek;
+            return weeklySalary * weeksInMonth;
+        }
+    }
 }
